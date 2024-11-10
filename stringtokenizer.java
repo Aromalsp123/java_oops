@@ -1,23 +1,35 @@
-import java.util.StringTokenizer;
-import java.util.Scanner;
+package stringtokenizer;
 
-public class IntegerTokenizer {
+import java.util.*;
 
+public class StringTokenizerExample {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a line of integers separated by spaces: ");
-        String input = scanner.nextLine();
-
-        StringTokenizer tokenizer = new StringTokenizer(input);
         int sum = 0;
 
-        System.out.println("Integers:");
-        while (tokenizer.hasMoreTokens()) {
-            int number = Integer.parseInt(tokenizer.nextToken());
-            System.out.println(number);
-            sum += number;
-        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the string with integers separated by spaces:");
 
-        System.out.println("Sum of integers: " + sum);
+        // Read the entire line of input
+        String input = sc.nextLine();
+        
+        // Create a StringTokenizer to split the input string by spaces
+        StringTokenizer st = new StringTokenizer(input, " ");
+        
+        // Process each token
+        while (st.hasMoreTokens()) {
+            String token = st.nextToken();
+            try {
+                // Parse the token to an integer
+                int number = Integer.parseInt(token);
+                System.out.println("Parsed integer: " + number);
+                sum += number; // Add to sum
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input: '" + token + "' is not an integer.");
+            }
+        }
+        
+        // Print the sum of the integers
+        System.out.println("Sum of the integers is: " + sum);
+        sc.close();
     }
 }
